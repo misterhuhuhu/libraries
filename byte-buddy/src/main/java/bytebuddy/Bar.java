@@ -15,7 +15,7 @@ public class Bar {
     }
 
     public String bar() {
-        return Bar.class.getSimpleName() + " - Bar";
+        return Bar.class.getName() + " - Bar";
     }
 
 }
