@@ -16,6 +16,11 @@
     <description>libraries</description>
     <modules>
         <module>byte-buddy</module>
+        <module>java-agent</module>
+        <module>app</module>
+        <module>reflection</module>
+        <module>httpclient</module>
+        <module>httpclient4</module>
     </modules>
     <properties>
         <java.version>17</java.version>
@@ -31,15 +36,21 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>net.bytebuddy</groupId>
+            <artifactId>byte-buddy</artifactId>
+            <version>1.14.11</version>
+        </dependency>
     </dependencies>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
+<!--    打包无main jar包时注释掉-->
+<!--    <build>-->
+<!--        <plugins>-->
+<!--            <plugin>-->
+<!--                <groupId>org.springframework.boot</groupId>-->
+<!--                <artifactId>spring-boot-maven-plugin</artifactId>-->
+<!--            </plugin>-->
+<!--        </plugins>-->
+<!--    </build>-->
 
 </project>

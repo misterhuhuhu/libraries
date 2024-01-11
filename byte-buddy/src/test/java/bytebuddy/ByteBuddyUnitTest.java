@@ -2,6 +2,8 @@ package bytebuddy;
 
 import net.bytebuddy.ByteBuddy;
 import net.bytebuddy.agent.ByteBuddyAgent;
+import net.bytebuddy.description.type.TypeDescription;
+import net.bytebuddy.dynamic.ClassFileLocator;
 import net.bytebuddy.dynamic.DynamicType;
 import net.bytebuddy.dynamic.loading.ClassLoadingStrategy;
 import net.bytebuddy.dynamic.loading.ClassReloadingStrategy;
@@ -9,10 +11,8 @@ import net.bytebuddy.implementation.FixedValue;
 import net.bytebuddy.implementation.MethodDelegation;
 import net.bytebuddy.implementation.SuperMethodCall;
 import net.bytebuddy.implementation.bind.annotation.Morph;
-import net.bytebuddy.implementation.bind.annotation.RuntimeType;
-import net.bytebuddy.implementation.bind.annotation.This;
 import net.bytebuddy.matcher.ElementMatchers;
-import net.bytebuddy.matcher.ModifierMatcher;
+import net.bytebuddy.pool.TypePool;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,7 +23,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.Objects;
-import java.util.function.Function;
 
 
 public class ByteBuddyUnitTest {
@@ -59,6 +58,7 @@ public class ByteBuddyUnitTest {
         new ByteBuddy()
                 .redefine(Foo.class)
                 .method(ElementMatchers.named("sayHelloFoo"))
+                // StubMethod.INSTANCE 代表清空方法体
                 .intercept(FixedValue.value("Hello Foo Redefined"))
                 .make()
                 .load(getClass().getClassLoader(), ClassReloadingStrategy.fromInstalledAgent());
@@ -84,7 +84,7 @@ public class ByteBuddyUnitTest {
     }
     
     @Test
-    public void 测试rebase() throws  IOException {
+    public void 测试rebase() throws IOException {
         //rebase 保留所有方法\属性\包名
         DynamicType.Unloaded<Foo> unloaded = new ByteBuddy().rebase(Foo.class)
                                                      .defineMethod("custom", String.class, Modifier.PUBLIC | Modifier.STATIC)//定义一个方法 custom，它返回一个 String 并具有一个public修饰符 static修饰符
@@ -94,7 +94,7 @@ public class ByteBuddyUnitTest {
         unloaded.saveIn(new File(file));
         
     }
-
+    
     @Test
     public void 获取委托实例() throws IOException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
         DynamicType.Unloaded<Foo> unloaded = new ByteBuddy().subclass(Foo.class)
@@ -104,7 +104,7 @@ public class ByteBuddyUnitTest {
                                                      .make();
         Foo foo = unloaded.load(getClass().getClassLoader()).getLoaded().getConstructor().newInstance();
         String s = foo.sayHelloFoo();
-        logger.info("return {}",s);
+        logger.info("return {}", s);
         /**
          * INFO bytebuddy.Foo2 -- thisObj  a.b.c@2072acb2
          * INFO bytebuddy.Foo2 -- thisMethod.getName()  sayHelloFoo
@@ -114,6 +114,7 @@ public class ByteBuddyUnitTest {
         unloaded.saveIn(new File(file));
         
     }
+    
     @Test
     public void 动态修改入参() throws IOException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
         DynamicType.Unloaded<Foo> unloaded = new ByteBuddy().subclass(Foo.class)
@@ -129,7 +130,7 @@ public class ByteBuddyUnitTest {
                                                      .make();
         Foo foo = unloaded.load(getClass().getClassLoader()).getLoaded().getConstructor().newInstance();
         String s = foo.sayHelloFoo(100);
-        logger.info("return {}",s);
+        logger.info("return {}", s);
         /**
          * INFO bytebuddy.Foo3 -- thisObj  a.b.c@5f6722d3
          * INFO bytebuddy.Foo3 -- thisMethod.getName()  sayHelloFoo
@@ -142,15 +143,15 @@ public class ByteBuddyUnitTest {
     
     @Test
     public void 拦截构造() throws IOException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
-
+        
         DynamicType.Unloaded<Foo> unloaded = new ByteBuddy().subclass(Foo.class)
                                                      .name("a.b.cObj")
                                                      //找到有一个参数的方法
                                                      .constructor(ElementMatchers.any())
                                                      .intercept(SuperMethodCall.INSTANCE.andThen(MethodDelegation.to(new Foo4())))//****必须在调用委托前调用父类构造****
                                                      .make();
-
-
+        
+        
         Foo foo = unloaded.load(getClass().getClassLoader()).getLoaded().getConstructor().newInstance();
         /**
          * Foo 构造
@@ -160,6 +161,7 @@ public class ByteBuddyUnitTest {
          */
         unloaded.saveIn(new File(file));
     }
+    
     @Test
     public void 拦截静态() throws IOException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
         
@@ -170,11 +172,11 @@ public class ByteBuddyUnitTest {
                                                      .rebase(Foo.class)
                                                      .name("t.Foo")
                                                      .method(ElementMatchers.named("sayFoo").and(ElementMatchers.isStatic()))
-                                                     .intercept(( MethodDelegation.to(new Foo5())) )
+                                                     .intercept((MethodDelegation.to(new Foo5())))
                                                      .make();
         Class<? extends Foo> loaded = unloaded.load(getClass().getClassLoader()).getLoaded();
         Object s = loaded.getMethod("sayFoo").invoke(Foo.class);
-        logger.info("return {}",s);
+        logger.info("return {}", s);
         /**
          * INFO bytebuddy.Foo5 -- thisObj  class t.Foo
          * INFO bytebuddy.Foo5 -- thisMethod.getName()  sayFoo
@@ -183,6 +185,7 @@ public class ByteBuddyUnitTest {
          */
         unloaded.saveIn(new File(file));
     }
+    
     @Test
     public void 定义方法和字段定义() throws Exception {
         DynamicType.Unloaded<Object> unloaded = new ByteBuddy().subclass(Object.class)// Object.class 的子类
@@ -198,6 +201,60 @@ public class ByteBuddyUnitTest {
         unloaded.saveIn(new File(file));
         Object invoke = m.invoke(type.getConstructor().newInstance());
         logger.info(invoke.toString());
+    }
+    
+    /**
+     * 如果  类 已加载
+     * @throws NoSuchMethodException
+     * @throws InvocationTargetException
+     * @throws IllegalAccessException
+     */
+    @Test
+    void class_already_loaded() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        DynamicType.Unloaded<Foo> unloaded = new ByteBuddy()
+                                                     //不能使用.subclass() 因为静态方法不会被继承
+                                                     //不能使用 redefine 因为不保留原方法
+                                                     
+                                                     .rebase(Foo.class)
+                                                     .name("t.Foo")
+                                                     .method(ElementMatchers.named("sayFoo").and(ElementMatchers.isStatic()))
+                                                     .intercept((MethodDelegation.to(new Foo5())))
+                                                     .make();
+        // ClassLoadingStrategy.Default.CHILD_FIRST  子类加载器优先,解决 java.lang.IllegalStateException: Class already loaded: class t.Foo
+        Class<? extends Foo> loaded = unloaded.load(getClass().getClassLoader(),ClassLoadingStrategy.Default.CHILD_FIRST).getLoaded();
+        Object s = loaded.getMethod("sayFoo").invoke(Foo.class);
+    }
+    
+    /**
+     * 拦截指定jar包的指定方法
+     * @throws NoSuchMethodException
+     * @throws InvocationTargetException
+     * @throws IllegalAccessException
+     * @throws IOException
+     */
+    @Test
+    void 自定义类的加载classLoader() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException, IOException {
+        
+        //从指定jar加载
+        ClassFileLocator jarClassFileLocator = ClassFileLocator.ForJarFile.of(new File("D:\\dev_soft\\apache-maven-3.9.4\\localRepository\\org\\springframework\\spring-beans\\6.1.2\\spring-beans-6.1.2.jar"));
+       //加载文件夹中指定.class文件
+//        ClassFileLocator.ForFolder forFolder = new ClassFileLocator.ForFolder(new File(""));
+        ClassFileLocator systemLoader = ClassFileLocator.ForClassLoader.ofSystemLoader();
+        
+        ClassFileLocator.Compound compound = new ClassFileLocator.Compound(jarClassFileLocator, systemLoader);
+        TypePool typePool = TypePool.Default.of(compound);
+        
+        // 不会加载
+        TypeDescription typeDefinition = typePool.describe("org.springframework.beans.factory.support.RootBeanDefinition").resolve();
+        
+        DynamicType.Unloaded<Object> unloaded = new ByteBuddy()
+                        
+                                                     .redefine(typeDefinition,compound)
+                                                     .method(ElementMatchers.named("getTargetType"))
+                                                     .intercept((MethodDelegation.to(new Foo2())))
+                                                     .make();
+        unloaded.saveIn(new File(file));
+
     }
     
 }

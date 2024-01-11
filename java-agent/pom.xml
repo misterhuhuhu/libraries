@@ -10,20 +10,45 @@
     </parent>
 
     <groupId>org.example</groupId>
-    <artifactId>byte-buddy</artifactId>
+    <artifactId>java-agent</artifactId>
 
     <properties>
+        <maven-jar-plugin.version>3.3.0</maven-jar-plugin.version>
+
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <dependencies>
-
+        <dependency>
+            <groupId>org.javassist</groupId>
+            <artifactId>javassist</artifactId>
+            <version>3.30.2-GA</version>
+        </dependency>
 
     </dependencies>
+
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+
+                <configuration>
+                    <archive>
+                        <manifestEntries>
+                            <Premain-Class>
+                                customer.jdk.javaagent.PreApplication
+                            </Premain-Class>
+
+                            <Can-Redefine-Classes>true</Can-Redefine-Classes>
+                            <Can-Retransform-Classes>true</Can-Retransform-Classes>
+                        </manifestEntries>
+                    </archive>
+
+                </configuration>
+            </plugin>
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
                 <executions>
@@ -37,9 +62,9 @@
                 <configuration>
                     <archive>
                         <manifestEntries>
-                            <!--                            添加premain入口-->
+<!--                            添加premain入口-->
                             <Premain-Class>
-                                bytebuddy.InstancePreApplication
+                                customer.jdk.javaagent.PreApplication
                             </Premain-Class>
 
                             <Can-Redefine-Classes>true</Can-Redefine-Classes>
@@ -53,4 +78,5 @@
             </plugin>
         </plugins>
     </build>
+
 </project>
