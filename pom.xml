@@ -21,6 +21,7 @@
         <module>reflection</module>
         <module>httpclient</module>
         <module>httpclient4</module>
+        <module>mybatis</module>
     </modules>
     <properties>
         <java.version>17</java.version>
@@ -40,6 +41,11 @@
             <groupId>net.bytebuddy</groupId>
             <artifactId>byte-buddy</artifactId>
             <version>1.14.11</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>import</scope>
         </dependency>
     </dependencies>
 

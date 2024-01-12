@@ -1,0 +1,14 @@
+
+spring:
+  datasource:
+    url: jdbc:mysql://192.168.91.128:3306/nacos?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+    password: 123
+    username: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      filter:
+        log4j:
+          statement-log-enabled: true
+mybatis:
+  mapper-locations: classpath:mapper/**
