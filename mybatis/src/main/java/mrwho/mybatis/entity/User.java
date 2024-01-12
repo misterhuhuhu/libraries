@@ -1,8 +1,11 @@
 package mrwho.mybatis.entity;
 
+import lombok.Builder;
+import lombok.Data;
 import lombok.ToString;
 
 @ToString
+
 public class User {
     private Long id;
     
@@ -14,23 +17,26 @@ public class User {
         return id;
     }
     
-    public void setId(Long id) {
+    public User setId(Long id) {
         this.id = id;
+        return this;
     }
     
     public Integer getAge() {
         return age;
     }
     
-    public void setAge(Integer age) {
+    public User setAge(Integer age) {
         this.age = age;
+        return this;
     }
     
     public String getName() {
         return name;
     }
     
-    public void setName(String name) {
+    public User setName(String name) {
         this.name = name;
+        return this;
     }
 }

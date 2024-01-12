@@ -19,9 +19,10 @@ public class MybatisTest {
     
     @Test
     void testUserMapper() {
-        List<User> users = userMapper.findByAll(new User());
+        List<User> users = userMapper.findByAll(new User().setId(1L));
         users.forEach(System.out::println);
         List<Users> users1 = usersMapper.selectByAll(new Users());
+        List<User> users2 = userMapper.find();
         users1.forEach(System.out::println);
     }
 }

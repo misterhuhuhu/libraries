@@ -3,6 +3,7 @@ package mrwho.mybatis.mapper;
 import java.util.List;
 
 import mrwho.mybatis.entity.User;
+import org.apache.ibatis.annotations.Select;
 
 public interface UserMapper {
     int deleteByPrimaryKey(Long id);
@@ -19,4 +20,8 @@ public interface UserMapper {
     int updateByPrimaryKeySelective(User record);
     
     int updateByPrimaryKey(User record);
+    
+    @Select("select * from `user` where 1 = 1 ")
+    List<User> find();
+    
 }
