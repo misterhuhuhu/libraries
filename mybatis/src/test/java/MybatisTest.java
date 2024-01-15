@@ -27,9 +27,5 @@ public class MybatisTest {
         List<User> users2 = userMapper.find();
         users1.forEach(System.out::println);
     }
-    @Test
-    void testInterceptor() {
-        System.out.println(service.SomeMethod());
-        System.out.println(service.SomeMethodWithArgs("args"));
-    }
+
 }
