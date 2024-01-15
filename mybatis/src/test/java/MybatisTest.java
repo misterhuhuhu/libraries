@@ -17,8 +17,7 @@ public class MybatisTest {
     private UserMapper userMapper;
     @Resource
     private UsersMapper usersMapper;
-    @Resource
-    private SomeService service;
+
     
     @Test
     void testUserMapper() {
@@ -27,9 +26,6 @@ public class MybatisTest {
         List<Users> users1 = usersMapper.selectByAll(new Users());
         List<User> users2 = userMapper.find();
         users1.forEach(System.out::println);
-        System.out.println(service.SomeMethod());
-        System.out.println(service.SomeMethodWithArgs("args"));
-        
     }
     @Test
     void testInterceptor() {
