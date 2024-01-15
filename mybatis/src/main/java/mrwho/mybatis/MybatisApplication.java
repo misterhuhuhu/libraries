@@ -21,13 +21,13 @@ public class MybatisApplication {
     
     public static void main(String[] args) {
         ConfigurableApplicationContext run = SpringApplication.run(MybatisApplication.class, args);
-        UserMapper userMapper = run.getBean(UserMapper.class);
-        UsersMapper usersMapper = run.getBean(UsersMapper.class);
-        
-        List<User> users = userMapper.findByAll(new User().setId(1L));
-        List<User> users2 = userMapper.find();
-        users.forEach(System.out::println);
-        List<Users> users1 = usersMapper.selectByAll(new Users());
-        users1.forEach(System.out::println);
+//        UserMapper userMapper = run.getBean(UserMapper.class);
+//        UsersMapper usersMapper = run.getBean(UsersMapper.class);
+//
+//        List<User> users = userMapper.findByAll(new User().setId(1L));
+//        List<User> users2 = userMapper.find();
+//        users.forEach(System.out::println);
+//        List<Users> users1 = usersMapper.selectByAll(new Users());
+//        users1.forEach(System.out::println);
     }
 }

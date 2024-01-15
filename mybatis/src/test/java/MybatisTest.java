@@ -4,6 +4,7 @@ import mrwho.mybatis.entity.User;
 import mrwho.mybatis.entity.Users;
 import mrwho.mybatis.mapper.UserMapper;
 import mrwho.mybatis.mapper.UsersMapper;
+import mrwho.mybatis.service.SomeService;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -16,6 +17,8 @@ public class MybatisTest {
     private UserMapper userMapper;
     @Resource
     private UsersMapper usersMapper;
+    @Resource
+    private SomeService service;
     
     @Test
     void testUserMapper() {
@@ -24,5 +27,13 @@ public class MybatisTest {
         List<Users> users1 = usersMapper.selectByAll(new Users());
         List<User> users2 = userMapper.find();
         users1.forEach(System.out::println);
+        System.out.println(service.SomeMethod());
+        System.out.println(service.SomeMethodWithArgs("args"));
+        
+    }
+    @Test
+    void testInterceptor() {
+        System.out.println(service.SomeMethod());
+        System.out.println(service.SomeMethodWithArgs("args"));
     }
 }
