@@ -23,6 +23,7 @@
         <module>httpclient4</module>
         <module>mybatis</module>
         <module>druid</module>
+        <module>mybatis-plus</module>
     </modules>
     <properties>
         <java.version>17</java.version>
@@ -31,23 +32,12 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-logging</artifactId>
-                </exclusion>
-            </exclusions>
+
         </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-logging</artifactId>
-                </exclusion>
-            </exclusions>
             <scope>test</scope>
         </dependency>
         <dependency>
