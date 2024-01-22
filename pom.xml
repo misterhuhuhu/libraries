@@ -24,6 +24,7 @@
         <module>mybatis</module>
         <module>druid</module>
         <module>mybatis-plus</module>
+        <module>Method-Handles</module>
     </modules>
     <properties>
         <java.version>17</java.version>
