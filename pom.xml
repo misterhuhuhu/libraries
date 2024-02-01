@@ -25,6 +25,10 @@
         <module>druid</module>
         <module>mybatis-plus</module>
         <module>Method-Handles</module>
+        <module>date</module>
+        <module>java9</module>
+        <module>mybatisjava</module>
+        <module>SuppressWarnings</module>
     </modules>
     <properties>
         <java.version>17</java.version>

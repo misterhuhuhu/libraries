@@ -1,0 +1,48 @@
+以下是@SuppressWarnings注释中可用的有效警告名称列表：
+
+- all: this is sort of a wildcard that suppresses all warnings
+- all：这是一种禁止所有警告的通配符
+- boxing: suppresses warnings related to boxing/unboxing operations
+- 装箱：禁止显示与装箱/拆箱操作相关的警告
+- unused: suppresses warnings of unused code
+- 未使用：禁止显示未使用代码的警告
+- cast: suppresses warnings related to object cast operations
+- 强制转换：禁止显示与对象强制转换操作相关的警告
+- deprecation: suppresses warnings related to deprecation, such as a deprecated class or method
+- 弃用：禁止显示与弃用相关的警告，例如已弃用的类或方法
+- restriction: suppresses warnings related to the usage of discouraged or forbidden references
+- 限制：禁止显示与使用不鼓励或禁止引用相关的警告
+- dep-ann: suppresses warnings relative to deprecated annotations
+- dep-ann：禁止显示与已弃用注释相关的警告
+- fallthrough: suppresses warnings related to missing break statements in switch statements
+- fallthrough：禁止显示与 switch 语句中缺少 break 语句相关的警告
+- finally: suppresses warnings related to finally blocks that don’t return
+- finally：禁止显示与未返回的 finally 块相关的警告
+- hiding: suppresses warnings relative to locals that hide variables
+- 隐藏：禁止显示相对于隐藏变量的局部变量的警告
+- incomplete-switch: suppresses warnings relative to missing entries in a switch statement (enum case)
+- incomplete-switch：禁止显示与 switch 语句中缺少条目相关的警告（枚举大小写）
+- nls: suppresses warnings related to non-nls string literals
+- NLS：禁止显示与非 NLS 字符串文本相关的警告
+- null: suppresses warnings related to null analysis
+- null：禁止显示与 null 分析相关的警告
+- serial: suppresses warnings related to the missing serialVersionUID field, which is typically found in a Serializable class
+- serial：禁止显示与缺少的 serialVersionUID 字段相关的警告，该字段通常位于 Serializable 类中
+- static-access: suppresses warnings related to incorrect static variable access
+- static-access：禁止显示与不正确的静态变量访问相关的警告
+- synthetic-access: suppresses warnings related to unoptimized access from inner classes
+- synthetic-access：禁止显示与来自内部类的未优化访问相关的警告
+- unchecked: suppresses warnings related to unchecked operations
+- 未选中：禁止显示与未选中操作相关的警告
+- unqualified-field-access: suppresses warnings related to unqualified field access
+- unqualified-field-access：禁止显示与非合格字段访问相关的警告
+- javadoc: suppresses warnings related to Javadoc
+- javadoc：禁止显示与 Javadoc 相关的警告
+- rawtypes: suppresses warnings related to the usage of raw types
+- rawtypes 禁止显示与使用 RAW 类型相关的警告
+- resource: suppresses warnings related to the usage of resources of type Closeable
+- resource 禁止显示与使用 Closeable 类型的资源相关的警告
+- super: suppresses warnings related to overriding a method without super invocations
+- 超级禁止与在没有超级调用的情况下重写方法相关的警告
+- sync-override: suppresses warnings due to missing synchronize when overriding a synchronized method
+- sync-override 禁止在重写同步方法时因缺少同步而发出的警告

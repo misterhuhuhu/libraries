@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mrwho.mybatisjava.mapper.CtCompanyBaseInfoJiaoyuMapper">
+  <resultMap id="BaseResultMap" type="mrwho.mybatisjava.entity.CtCompanyBaseInfoJiaoyu">
+    <!--@mbg.generated-->
+    <!--@Table ct_company_base_info_jiaoyu-->
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="organization_id" jdbcType="VARCHAR" property="organizationId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="unified_social_credit_code" jdbcType="VARCHAR" property="unifiedSocialCreditCode" />
+    <result column="area_code" jdbcType="VARCHAR" property="areaCode" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="network_status" jdbcType="CHAR" property="networkStatus" />
+    <result column="corporator" jdbcType="VARCHAR" property="corporator" />
+    <result column="corporator_tel" jdbcType="VARCHAR" property="corporatorTel" />
+    <result column="industry_dept" jdbcType="VARCHAR" property="industryDept" />
+    <result column="industry_dept_id" jdbcType="VARCHAR" property="industryDeptId" />
+    <result column="fire_manage_id" jdbcType="VARCHAR" property="fireManageId" />
+    <result column="fire_safe_person" jdbcType="VARCHAR" property="fireSafePerson" />
+    <result column="fire_safe_person_tel" jdbcType="VARCHAR" property="fireSafePersonTel" />
+    <result column="numbering" jdbcType="VARCHAR" property="numbering" />
+    <result column="latitude" jdbcType="DECIMAL" property="latitude" />
+    <result column="longitude" jdbcType="DECIMAL" property="longitude" />
+    <result column="monitor_center_id" jdbcType="VARCHAR" property="monitorCenterId" />
+    <result column="social_center_id" jdbcType="VARCHAR" property="socialCenterId" />
+    <result column="third_id" jdbcType="VARCHAR" property="thirdId" />
+    <result column="third_data_id" jdbcType="VARCHAR" property="thirdDataId" />
+    <result column="monitor_type" jdbcType="VARCHAR" property="monitorType" />
+    <result column="industry_type" jdbcType="VARCHAR" property="industryType" />
+    <result column="maintenance_unit_id" jdbcType="VARCHAR" property="maintenanceUnitId" />
+    <result column="evaluation_level" jdbcType="VARCHAR" property="evaluationLevel" />
+    <result column="grid_code" jdbcType="VARCHAR" property="gridCode" />
+    <result column="fire_danger" jdbcType="VARCHAR" property="fireDanger" />
+    <result column="monitor_level" jdbcType="INTEGER" property="monitorLevel" />
+    <result column="company_type" jdbcType="VARCHAR" property="companyType" />
+    <result column="fire_manage_tel" jdbcType="VARCHAR" property="fireManageTel" />
+    <result column="fire_systems" jdbcType="VARCHAR" property="fireSystems" />
+    <result column="is_deleted" jdbcType="INTEGER" property="isDeleted" />
+    <result column="create_user" jdbcType="VARCHAR" property="createUser" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_user" jdbcType="VARCHAR" property="updateUser" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="create_dept" jdbcType="VARCHAR" property="createDept" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="risk_id" jdbcType="VARCHAR" property="riskId" />
+    <result column="kitchen_area" jdbcType="FLOAT" property="kitchenArea" />
+    <result column="corporator_id" jdbcType="VARCHAR" property="corporatorId" />
+    <result column="company_level" jdbcType="VARCHAR" property="companyLevel" />
+    <result column="house_number" jdbcType="VARCHAR" property="houseNumber" />
+    <result column="school_type" jdbcType="INTEGER" property="schoolType" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, organization_id, `name`, unified_social_credit_code, area_code, address, network_status, 
+    corporator, corporator_tel, industry_dept, industry_dept_id, fire_manage_id, fire_safe_person, 
+    fire_safe_person_tel, numbering, latitude, longitude, monitor_center_id, social_center_id, 
+    third_id, third_data_id, monitor_type, industry_type, maintenance_unit_id, evaluation_level, 
+    grid_code, fire_danger, monitor_level, company_type, fire_manage_tel, fire_systems, 
+    is_deleted, create_user, create_time, update_user, update_time, create_dept, `status`, 
+    risk_id, kitchen_area, corporator_id, company_level, house_number, school_type
+  </sql>
+
+
+  <select id="selectCT_COMPANY_BASE_INFO_JIAOYU" resultType="mrwho.mybatisjava.entity.CtCompanyBaseInfoJiaoyu">
+    select * from  ct_company_base_info_jiaoyu limit 500
+  </select>
+</mapper>
