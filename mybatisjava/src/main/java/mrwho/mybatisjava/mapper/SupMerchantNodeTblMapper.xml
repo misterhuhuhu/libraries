@@ -227,8 +227,10 @@
             and DISTRICT_REGION_ID is null
             and STREET_REGION_ID is null
           where regiontbl.namecn is not null
-            and MERCHANT_NODE_NAME != '默认商家节点'
-          union
+            and MERCHANT_NODE_NAME != '默认商家节点' and sup_merchant_node_tbl.STATUS = 'E'
+      and sup_merchant_node_tbl.MERCHANT_NODE_CODE is not null
+      and sup_merchant_node_tbl.MERCHANT_NODE_CODE != ''
+      union
           select MERCHANT_NODE_NAME,
                  regiontbl.namecn,
                  MERCHANT_NODE_CODE,
@@ -244,7 +246,9 @@
             and DISTRICT_REGION_ID is null
             and STREET_REGION_ID is null
           where regiontbl.namecn is not null
-            and MERCHANT_NODE_NAME != '默认商家节点'
+            and MERCHANT_NODE_NAME != '默认商家节点' and sup_merchant_node_tbl.STATUS = 'E'
+      and sup_merchant_node_tbl.MERCHANT_NODE_CODE is not null
+      and sup_merchant_node_tbl.MERCHANT_NODE_CODE != ''
           union
           select MERCHANT_NODE_NAME,
                  regiontbl.namecn,
@@ -260,7 +264,9 @@
                  left join regiontbl on regiontbl.regionid = sup_merchant_node_tbl.DISTRICT_REGION_ID
             and STREET_REGION_ID is null
           where regiontbl.namecn is not null
-            and MERCHANT_NODE_NAME != '默认商家节点'
+            and MERCHANT_NODE_NAME != '默认商家节点' and sup_merchant_node_tbl.STATUS = 'E'
+      and sup_merchant_node_tbl.MERCHANT_NODE_CODE is not null
+      and sup_merchant_node_tbl.MERCHANT_NODE_CODE != ''
           union
           select MERCHANT_NODE_NAME,
                  regiontbl.namecn,
@@ -274,7 +280,9 @@
                  sup_merchant_node_tbl.STATUS
           from sup_merchant_node_tbl
                  left join regiontbl on regiontbl.regionid = sup_merchant_node_tbl.STREET_REGION_ID
-          where regiontbl.namecn is not null
+          where regiontbl.namecn is not null and sup_merchant_node_tbl.STATUS = 'E'
+      and sup_merchant_node_tbl.MERCHANT_NODE_CODE is not null
+      and sup_merchant_node_tbl.MERCHANT_NODE_CODE != ''
             and MERCHANT_NODE_NAME != '默认商家节点') as a
     limit #{start},#{offset}
 

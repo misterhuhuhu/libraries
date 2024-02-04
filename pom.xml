@@ -29,6 +29,10 @@
         <module>java9</module>
         <module>mybatisjava</module>
         <module>SuppressWarnings</module>
+        <module>ParallelStream</module>
+        <module>Phaser</module>
+        <module>Fork-Join</module>
+        <module>Exchanger</module>
     </modules>
     <properties>
         <java.version>17</java.version>

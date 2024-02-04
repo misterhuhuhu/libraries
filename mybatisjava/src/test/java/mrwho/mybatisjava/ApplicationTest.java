@@ -44,42 +44,44 @@ public class ApplicationTest {
     @Test
     @Transactional(rollbackFor = Exception.class)
     public void insert(){
+        List<SupMerchantNodeTblWithRegion> supMerchantNodeTblWithRegions = supMerchantNodeTblMapper.selectSupMerchantNodeTblWithRegionByLimit(0, 16000);
+        log.info("supMerchantNodeTblWithRegions.size()");
 //        List<SupMerchantNodeTblWithRegion> supMerchantNodeTblWithRegions = supMerchantNodeTblMapper.selectSupMerchantNodeTblWithRegion();
 //        Long l = supMerchantNodeTblMapper.selectSupMerchantNodeTblCount();
-        IntStream.range(0,7).parallel().forEach(index->{
-            List<SupMerchantNodeTblWithRegion> supMerchantNodeTblWithRegions = supMerchantNodeTblMapper.selectSupMerchantNodeTblWithRegionByLimit(index * 5000, 5000);
-            List<CtCompanyBaseInfoJiaoyu> collect = supMerchantNodeTblWithRegions.stream().map(item -> {
-                CtCompanyBaseInfoJiaoyu ctCompanyBaseInfoJiaoyu = new CtCompanyBaseInfoJiaoyu();
-                ctCompanyBaseInfoJiaoyu.setAddress(item.getDetailAdress());
-                ctCompanyBaseInfoJiaoyu.setName(item.getMerchantNodeName());
-                ctCompanyBaseInfoJiaoyu.setRegionName(item.getNamecn());
-                ctCompanyBaseInfoJiaoyu.setLongitude(BigDecimal.valueOf(Double.parseDouble(Optional.ofNullable(item.getLongitude()).orElse("0"))));
-                ctCompanyBaseInfoJiaoyu.setLatitude(BigDecimal.valueOf(Double.parseDouble( Optional.ofNullable(item.getLatitude()).orElse("0"))));
-                ctCompanyBaseInfoJiaoyu.setFireSafePerson(item.getContacts());
-                ctCompanyBaseInfoJiaoyu.setFireManageTel(item.getPhone());
-                ctCompanyBaseInfoJiaoyu.setThirdDataId(item.getMerchantNodeCode());
-                ctCompanyBaseInfoJiaoyu.setSchoolType(Integer.parseInt(item.getMerchantType()));
-                return ctCompanyBaseInfoJiaoyu;
-            }).toList();
-           
-            List<CtCompanyInfoJiaoyu> list = supMerchantNodeTblWithRegions.stream().map(item -> {
-                CtCompanyInfoJiaoyu ctCompanyInfoJiaoyu = new CtCompanyInfoJiaoyu();
-                ctCompanyInfoJiaoyu.setCompanyName(item.getMerchantNodeName());
-                ctCompanyInfoJiaoyu.setRegionName(item.getNamecn());
-                ctCompanyInfoJiaoyu.setAddress(item.getDetailAdress());
-                ctCompanyInfoJiaoyu.setLatitude(BigDecimal.valueOf(Double.parseDouble(Optional.ofNullable(item.getLatitude()).orElse("0"))));
-                ctCompanyInfoJiaoyu.setLongitude(BigDecimal.valueOf(Double.parseDouble(Optional.ofNullable(item.getLongitude()).orElse("0"))));
-                ctCompanyInfoJiaoyu.setFireSafeManager(item.getContacts());
-                ctCompanyInfoJiaoyu.setFireSafeManagerTel(item.getPhone());
-                ctCompanyInfoJiaoyu.setThirdDataId(item.getMerchantNodeCode());
-                ctCompanyInfoJiaoyu.setSchoolType(Integer.parseInt(item.getMerchantType()));
-                return ctCompanyInfoJiaoyu;
-            }).toList();
-            log.info("第{}个插入",index);
-            boolean b = ctCompanyBaseInfoJiaoyuService.saveBatch(collect);
-            boolean b1 = ctCompanyInfoJiaoyuService.saveBatch(list);
-            log.info("第{}个插入完成",index);
-        });
+//        IntStream.range(0,9).parallel().forEach(index->{
+//            List<SupMerchantNodeTblWithRegion> supMerchantNodeTblWithRegions = supMerchantNodeTblMapper.selectSupMerchantNodeTblWithRegionByLimit(index * 2100, 2100);
+//            List<CtCompanyBaseInfoJiaoyu> collect = supMerchantNodeTblWithRegions.stream().map(item -> {
+//                CtCompanyBaseInfoJiaoyu ctCompanyBaseInfoJiaoyu = new CtCompanyBaseInfoJiaoyu();
+//                ctCompanyBaseInfoJiaoyu.setAddress(item.getDetailAdress());
+//                ctCompanyBaseInfoJiaoyu.setName(item.getMerchantNodeName());
+//                ctCompanyBaseInfoJiaoyu.setRegionName(item.getNamecn());
+//                ctCompanyBaseInfoJiaoyu.setLongitude(BigDecimal.valueOf(Double.parseDouble(Optional.ofNullable(item.getLongitude()).orElse("0"))));
+//                ctCompanyBaseInfoJiaoyu.setLatitude(BigDecimal.valueOf(Double.parseDouble( Optional.ofNullable(item.getLatitude()).orElse("0"))));
+//                ctCompanyBaseInfoJiaoyu.setFireSafePerson(item.getContacts());
+//                ctCompanyBaseInfoJiaoyu.setFireManageTel(item.getPhone());
+//                ctCompanyBaseInfoJiaoyu.setThirdDataId(item.getMerchantNodeCode());
+//                ctCompanyBaseInfoJiaoyu.setSchoolType(Integer.parseInt(item.getMerchantType()));
+//                return ctCompanyBaseInfoJiaoyu;
+//            }).toList();
+//
+//            List<CtCompanyInfoJiaoyu> list = supMerchantNodeTblWithRegions.stream().map(item -> {
+//                CtCompanyInfoJiaoyu ctCompanyInfoJiaoyu = new CtCompanyInfoJiaoyu();
+//                ctCompanyInfoJiaoyu.setCompanyName(item.getMerchantNodeName());
+//                ctCompanyInfoJiaoyu.setRegionName(item.getNamecn());
+//                ctCompanyInfoJiaoyu.setAddress(item.getDetailAdress());
+//                ctCompanyInfoJiaoyu.setLatitude(BigDecimal.valueOf(Double.parseDouble(Optional.ofNullable(item.getLatitude()).orElse("0"))));
+//                ctCompanyInfoJiaoyu.setLongitude(BigDecimal.valueOf(Double.parseDouble(Optional.ofNullable(item.getLongitude()).orElse("0"))));
+//                ctCompanyInfoJiaoyu.setFireSafeManager(item.getContacts());
+//                ctCompanyInfoJiaoyu.setFireSafeManagerTel(item.getPhone());
+//                ctCompanyInfoJiaoyu.setThirdDataId(item.getMerchantNodeCode());
+//                ctCompanyInfoJiaoyu.setSchoolType(Integer.parseInt(item.getMerchantType()));
+//                return ctCompanyInfoJiaoyu;
+//            }).toList();
+//            log.info("第{}个插入",index);
+//            boolean b = ctCompanyBaseInfoJiaoyuService.saveBatch(collect);
+//            boolean b1 = ctCompanyInfoJiaoyuService.saveBatch(list);
+//            log.info("第{}个插入完成",index);
+//        });
         
     }
 }
