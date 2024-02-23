@@ -1,0 +1,30 @@
+package lazylambda;
+
+import java.util.concurrent.atomic.AtomicReference;
+import java.util.function.Supplier;
+
+public class LazyLambdaThreadSafeSupplier<T> extends LambdaSupplier<T> {
+
+    private final AtomicReference<T> data;
+
+    public LazyLambdaThreadSafeSupplier(Supplier<T> expensiveData) {
+        super(expensiveData);
+        data = new AtomicReference<>();
+    }
+    
+    /**
+     * 线程安全的懒加载
+     * @return
+     */
+    public T getData() {
+        if (data.get() == null) {
+            synchronized (data) {
+                if (data.get() == null) {
+                    data.set(expensiveData.get());
+                }
+            }
+        }
+        return data.get();
+    }
+
+}

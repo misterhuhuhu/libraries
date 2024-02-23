@@ -7,6 +7,9 @@ import org.apache.ibatis.plugin.Intercepts;
 import org.apache.ibatis.plugin.Invocation;
 import org.apache.ibatis.plugin.Signature;
 
+/**
+ * 不能拦截非mybatis方法
+ */
 @Intercepts({
         @Signature(type = SomeService.class, method = "SomeMethod", args = {}),
 //        @Signature(type = SomeService.class, method = "PrivateMethod", args = {}),

@@ -33,6 +33,10 @@
         <module>Phaser</module>
         <module>Fork-Join</module>
         <module>Exchanger</module>
+        <module>functional</module>
+        <module>ZipFile</module>
+        <module>nio</module>
+        <module>io</module>
     </modules>
     <properties>
         <java.version>17</java.version>
