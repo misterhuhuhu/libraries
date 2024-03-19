@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mrwho.mybatisjava.mapper.FireCabinetStaffProfileMapper">
+  <resultMap id="BaseResultMap" type="mrwho.mybatisjava.entity.FireCabinetStaffProfile">
+    <!--@mbg.generated-->
+    <!--@Table ct_fire_cabinet_staff_profile-->
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="career" jdbcType="VARCHAR" property="career" />
+    <result column="train" jdbcType="VARCHAR" property="train" />
+    <result column="fire_fight_times" jdbcType="INTEGER" property="fireFightTimes" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, career, train, fire_fight_times
+  </sql>
+</mapper>
