@@ -56,9 +56,10 @@ public class GetAreaFromStats {
     @SneakyThrows
     public void ASdawsd() {
         List<Region> regions = regionService.getBaseMapper().selectList(null);
-        WebDriver driver = webDriverFactory.getInstance();
+        WebDriver driver = WebDriverQueue.getInstance();
         driver.get(startUrl);
         List<WebElement> elements = driver.findElements(new By.ByXPath("/html/body/table[2]/tbody/tr[1]/td/table/tbody/tr[2]/td/table/tbody/tr/td/table/tbody/tr/td/a"));
+        WebDriverQueue.returnInstance(driver);
         String ancestors = "0";
         String treeNames = "";
         List<Region> regionList = elements.stream().map(k -> {
@@ -75,7 +76,7 @@ public class GetAreaFromStats {
             region.setUrl(url);
             return region;
         }).toList();
-        Stream<Region> concat = regionList.stream().skip(11).limit(2);
+        Stream<Region> concat = regionList.stream().skip(19);//.limit(6);
         
         List<CompletableFuture<Void>> list1 = concat.map(k -> CompletableFuture.runAsync(() -> {
             Region region = k;
@@ -137,10 +138,11 @@ public class GetAreaFromStats {
 //    }
     
     public void getCity(String cityUrl, String parentId, Region region) {
-        WebDriver driver = webDriverFactory.getInstance();
+        WebDriver driver = WebDriverQueue.getInstance();
         driver.get(cityUrl);
         List<WebElement> urlXpath = driver.findElements(new By.ByXPath(URL_XPATH));
         List<WebElement> nameXpath = driver.findElements(new By.ByXPath(NAME_XPATH));
+        WebDriverQueue.returnInstance(driver);
         List<Region> regionList = new ArrayList<>(urlXpath.size());
         for (int i = 0; i < urlXpath.size(); i++) {
             Region copy = new Region();
@@ -157,7 +159,7 @@ public class GetAreaFromStats {
             copy.setUrl(url);
             regionList.add(copy);
         }
-        regionList.forEach(k -> {
+        regionList.parallelStream().forEach(k -> {
             String url = k.getUrl();
             String name = k.getName();
             String code = k.getCode();
@@ -170,10 +172,11 @@ public class GetAreaFromStats {
     }
     
     public void getDistrict(String cityUrl, String parentId, Region region) {
-        WebDriver driver = webDriverFactory.getInstance();
+        WebDriver driver = WebDriverQueue.getInstance();
         driver.get(cityUrl);
         List<WebElement> urlXpath = driver.findElements(new By.ByXPath(URL_XPATH));
         List<WebElement> nameXpath = driver.findElements(new By.ByXPath(NAME_XPATH));
+        WebDriverQueue.returnInstance(driver);
         List<Region> regionList = new ArrayList<>(urlXpath.size());
         for (int i = 0; i < urlXpath.size(); i++) {
             WebElement urlElement = urlXpath.get(i);
@@ -194,7 +197,7 @@ public class GetAreaFromStats {
             regionList.add(disReign);
         }
         list.addAll(regionList);
-        regionList.forEach(k->{
+        regionList.parallelStream().forEach(k->{
             String url = k.getUrl();
             String code = k.getCode();
             if (StringUtils.isEmpty(url)) {
@@ -206,10 +209,11 @@ public class GetAreaFromStats {
     }
     
     public void getTown(String cityUrl, String parentId, Region region) {
-        WebDriver driver = webDriverFactory.getInstance();
+        WebDriver driver = WebDriverQueue.getInstance();
         driver.get(cityUrl);
         List<WebElement> urlXpath = driver.findElements(new By.ByXPath(URL_XPATH));
         List<WebElement> nameXpath = driver.findElements(new By.ByXPath(NAME_XPATH));
+        WebDriverQueue.returnInstance(driver);
         List<Region> regionList = new ArrayList<>(urlXpath.size());
         for (int i = 0; i < urlXpath.size(); i++) {
             WebElement urlElement = urlXpath.get(i);
@@ -230,7 +234,7 @@ public class GetAreaFromStats {
            
         }
         list.addAll(regionList);
-        regionList.forEach(k->{
+        regionList.parallelStream().forEach(k->{
             String url = k.getUrl();
             String code = k.getCode();
             if (StringUtils.isEmpty(url)) {
