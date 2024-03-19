@@ -105,38 +105,6 @@ public class GetAreaFromStats {
         System.out.println(list.size());
     }
     
-//    @Test
-//    @SneakyThrows
-//    public void ASdawsd1() {
-//
-//        WebDriver driver = webDriverFactory.getInstance();
-//        driver.get(startUrl);
-//
-//        List<WebElement> elements = driver.findElements(new By.ByXPath("/html/body/table[2]/tbody/tr[1]/td/table/tbody/tr[2]/td/table/tbody/tr/td/table/tbody/tr/td/a"));
-//        String ancestors = "0";
-//        String treeNames = "";
-//        log.info("省份数量{}", elements.size());
-//        elements.forEach(k -> {
-//            {
-//                String url = k.getAttribute("href");
-//                String code = k.getAttribute("href").substring(preUrl.length(), preUrl.length() + 2) + "0000";
-//                String name = k.getText();
-//                Region region = new Region();
-//                region.setProvinceName(name);
-//                region.setProvinceCode(code);
-//                this.getCity(url, code, ancestors, name, region);
-//            }
-//        });
-//        Runtime.getRuntime().exec("taskkill -im chromedriver.exe -f");
-//        Runtime.getRuntime().exec("taskkill -im  chrome.exe -f");
-//        boolean b = regionService.saveBatch(list, 5000);
-//
-//        System.out.println(b);
-//        System.out.println(list.size());
-//
-//
-//    }
-    
     public void getCity(String cityUrl, String parentId, Region region) {
         WebDriver driver = WebDriverQueue.getInstance();
         driver.get(cityUrl);
