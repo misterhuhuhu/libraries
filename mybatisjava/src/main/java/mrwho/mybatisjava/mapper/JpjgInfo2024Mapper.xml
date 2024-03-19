@@ -49,4 +49,11 @@
         </where>
 
     </select>
+
+    <select id="select20240226" resultMap="BaseResultMap">
+
+        select * from jpjg_info_2024 where  phone not in (
+            select account from blade_user where  create_time like '2024-02-26 %'
+        )
+    </select>
 </mapper>

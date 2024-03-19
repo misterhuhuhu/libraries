@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mrwho.mybatisjava.mapper.BladeUserMapper">
+  <resultMap id="BaseResultMap" type="mrwho.mybatisjava.entity.BladeUser">
+    <!--@mbg.generated-->
+    <!--@Table blade_user-->
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="tenant_id" jdbcType="VARCHAR" property="tenantId" />
+    <result column="code" jdbcType="VARCHAR" property="code" />
+    <result column="user_type" jdbcType="INTEGER" property="userType" />
+    <result column="account" jdbcType="VARCHAR" property="account" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="real_name" jdbcType="VARCHAR" property="realName" />
+    <result column="avatar" jdbcType="VARCHAR" property="avatar" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="birthday" jdbcType="TIMESTAMP" property="birthday" />
+    <result column="sex" jdbcType="INTEGER" property="sex" />
+    <result column="role_id" jdbcType="VARCHAR" property="roleId" />
+    <result column="dept_id" jdbcType="VARCHAR" property="deptId" />
+    <result column="area_code" jdbcType="VARCHAR" property="areaCode" />
+    <result column="post_id" jdbcType="VARCHAR" property="postId" />
+    <result column="effective_date" jdbcType="TIMESTAMP" property="effectiveDate" />
+    <result column="message_push_type" jdbcType="VARCHAR" property="messagePushType" />
+    <result column="receive_push_message" jdbcType="CHAR" property="receivePushMessage" />
+    <result column="attach_id" jdbcType="VARCHAR" property="attachId" />
+    <result column="create_user" jdbcType="VARCHAR" property="createUser" />
+    <result column="create_dept" jdbcType="VARCHAR" property="createDept" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_user" jdbcType="VARCHAR" property="updateUser" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="is_deleted" jdbcType="INTEGER" property="isDeleted" />
+    <result column="resource_type" jdbcType="CHAR" property="resourceType" />
+    <result column="work_time" jdbcType="TIMESTAMP" property="workTime" />
+    <result column="department_id" jdbcType="VARCHAR" property="departmentId" />
+    <result column="open_id" jdbcType="VARCHAR" property="openId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, tenant_id, code, user_type, account, `password`, `name`, real_name, avatar, email, 
+    phone, birthday, sex, role_id, dept_id, area_code, post_id, effective_date, message_push_type, 
+    receive_push_message, attach_id, create_user, create_dept, create_time, update_user, 
+    update_time, `status`, is_deleted, resource_type, work_time, department_id, open_id
+  </sql>
+</mapper>

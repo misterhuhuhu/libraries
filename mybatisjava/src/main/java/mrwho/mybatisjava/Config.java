@@ -11,14 +11,14 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @Slf4j
 public class Config {
-    
-    @Bean
-    public ConfigurationCustomizer configurationCustomizer() {
-        
-        return configuration -> {
-            configuration.addInterceptor(new SQLLogPlugin());
-            configuration.addInterceptor(new SQLLogPlugin2());
-        };
-    }
+//
+//    @Bean
+//    public ConfigurationCustomizer configurationCustomizer() {
+//
+//        return configuration -> {
+//            configuration.addInterceptor(new SQLLogPlugin());
+//            configuration.addInterceptor(new SQLLogPlugin2());
+//        };
+//    }
     
 }

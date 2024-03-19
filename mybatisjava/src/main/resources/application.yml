@@ -1,8 +1,12 @@
 spring:
+  jackson:
+    #日期格式化
+    date-format: yyyy-MM-dd HH:mm:ss
+
   datasource:
-    url: jdbc:mysql://219.145.215.184:3306/zg119?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
-    username: root
-    password: Zg119admin@xfwlw
+    url: jdbc:mysql://192.168.1.131:3306/bladex?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+    username: zguser2
+    password: 96k@Px7d
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.zaxxer.hikari.HikariDataSource
 mybatis-plus:
