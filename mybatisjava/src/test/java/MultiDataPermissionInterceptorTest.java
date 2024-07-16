@@ -138,7 +138,7 @@ public class MultiDataPermissionInterceptorTest {
                                          "left join (select * from blade_dict_biz where code='alarm_type') blade_dict_biz on blade_dict_biz.dict_key=a.alarm_type\n" +
                                          "\n" +
                                          "where a.is_deleted = 0\n" +
-                                         "  and a.alarm_code != '2-0-0'\n" +
+                                         " -- and a.alarm_code != '2-0-0'\n" +
                                          "and a.receive_time >= DATE_FORMAT(date_sub(current_date(), interval 1 day), '%Y-%m-%d 00:00:00' )\n" +
                                          "and a.receive_time <= DATE_FORMAT(current_date(), '%Y-%m-%d 00:00:00' )\n" +
                                          "group by ccbi.name,ccbi.social_center_id\n" +
