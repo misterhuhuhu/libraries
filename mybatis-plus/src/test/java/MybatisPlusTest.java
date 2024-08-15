@@ -31,9 +31,9 @@ public class MybatisPlusTest {
         
         List<BladeParam> bladeParams = bladeParamMapper.selectList(new LambdaQueryWrapper<BladeParam>().eq(BladeParam::getParamKey,"1"));
         List<BladeParam> list = bladeParamService.list();
-        log.info(bladeParams.toString());
-        log.info(list.toString());
-        
+//        log.info(bladeParams.toString());
+//        log.info(list.toString());
+//
         
     }
     
