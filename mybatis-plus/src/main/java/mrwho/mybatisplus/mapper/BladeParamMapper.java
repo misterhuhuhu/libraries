@@ -15,5 +15,6 @@ public interface BladeParamMapper extends BaseMapper<BladeParam> {
      * @param queryWrapper
      * @return
      */
-    List<BladeParam> selectByAll(BladeParam bladeParam, @Param("queryWrapper") Wrapper<?> queryWrapper);
+    List<BladeParam> selectByAll();
+    List<BladeParam> selectABCD(BladeParam bladeParam, @Param("queryWrapper") Wrapper<?> queryWrapper);
 }

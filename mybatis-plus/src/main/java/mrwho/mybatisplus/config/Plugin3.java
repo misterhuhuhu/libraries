@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.toolkit.ArrayUtils;
 import lombok.extern.slf4j.Slf4j;
 import net.sf.jsqlparser.parser.CCJSqlParserUtil;
 import net.sf.jsqlparser.statement.Statement;
+import net.sf.jsqlparser.statement.select.PlainSelect;
 import org.apache.ibatis.cache.CacheKey;
 import org.apache.ibatis.executor.Executor;
 import org.apache.ibatis.executor.statement.StatementHandler;
@@ -47,7 +48,6 @@ public class Plugin3 implements Interceptor {
         }
         Object parameter = args[1];
         RowBounds rowBounds = (RowBounds) args[2];
-        ResultHandler resultHandler = (ResultHandler) args[3];
         Executor executor = (Executor) invocation.getTarget();
         CacheKey cacheKey;
         BoundSql boundSql;
@@ -65,6 +65,7 @@ public class Plugin3 implements Interceptor {
         //获取到原始sql语句
         log.info(sql);
         Statement statement = CCJSqlParserUtil.parse(sql);
+//        PlainSelect statement1 = (PlainSelect) statement;
         return invocation.proceed();
         
     }

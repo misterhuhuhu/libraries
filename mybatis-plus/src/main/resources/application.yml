@@ -6,7 +6,6 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.zaxxer.hikari.HikariDataSource
 
-mybatis-plus:
-  mapper-locations: classpath:mapper/**
+
 #  configuration:
 #    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
